@@ -1,246 +1,290 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florescer | Vrin Resende - Fotografia de Parto</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
-        .bg-beige-light { background-color: #FDFBF9; }
-        .text-sage-dark { color: #4A443F; }
-        .text-earth { color: #8B7E74; }
-        .bg-gold-soft { background-color: #C4A484; }
-        .hero-gradient { background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%, #FDFBF9 100%); }
-    </style>
-</head>
-<body class="bg-beige-light text-sage-dark antialiased">
+import React, { useState, useEffect } from 'react';
+import { Camera, Heart, Instagram, Mail, Phone, Menu, X, ChevronRight, MessageCircle, MapPin } from 'lucide-react';
 
-    <!-- Navegação -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5 px-6">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="text-2xl font-serif italic tracking-tighter text-earth">Florescer</div>
+// Componente Principal
+export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Monitorizar scroll para mudar estilo do header
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Início', href: '#home' },
+    { name: 'Sobre', href: '#about' },
+    { name: 'Portfólio', href: '#portfolio' },
+    { name: 'Serviços', href: '#services' },
+    { name: 'Contacto', href: '#contact' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#FDFBF9] text-[#4A443F] font-sans selection:bg-[#E8D5C4]">
+      {/* Navigation */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="text-2xl font-serif italic tracking-tighter text-[#8B7E74]">
+              Florescer
             </div>
-            <div class="hidden md:flex gap-8">
-                <a href="#home" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Início</a>
-                <a href="#about" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Sobre</a>
-                <a href="#portfolio" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Portfólio</a>
-                <a href="#services" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Serviços</a>
-                <a href="#contact" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Contato</a>
+          </div>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex gap-8">
+            {navLinks.map((link) => (
+              <a key={link.name} href={link.href} className="text-sm uppercase tracking-widest hover:text-[#C4A484] transition-colors">
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Toggle */}
+          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white absolute top-full left-0 w-full shadow-xl p-6 flex flex-col gap-4 animate-in slide-in-from-top">
+            {navLinks.map((link) => (
+              <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-lg font-medium">
+                {link.name}
+              </a>
+            ))}
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1555252333-9f8e92e65ee9?q=80&w=2070&auto=format&fit=crop" 
+            alt="Momento de parto emocionante" 
+            className="w-full h-full object-cover opacity-80"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#FDFBF9]"></div>
+        </div>
+        
+        <div className="relative z-10 text-center px-6 max-w-4xl">
+          <h1 className="text-5xl md:text-7xl font-serif mb-6 text-white drop-shadow-lg">
+            A eternidade em um <span className="italic">nascimento</span>.
+          </h1>
+          <p className="text-xl md:text-2xl text-white/90 mb-8 font-light italic">
+            Documentando o florescer da vida através de um olhar devocional e protetor.
+          </p>
+          <a href="#portfolio" className="inline-block bg-[#C4A484] text-white px-8 py-4 rounded-full hover:bg-[#B38B6D] transition-all transform hover:scale-105 shadow-lg uppercase tracking-widest text-sm font-semibold">
+            Ver Portfólio
+          </a>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="relative">
+            <div className="aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl bg-[#E8D5C4]">
+              {/* Imagem da Vrin Resende */}
+              <img 
+                src="photo_2025-10-02_18-33-17.jpg" 
+                alt="Vrin Resende" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.src = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop";
+                }}
+              />
             </div>
-            <button class="md:hidden" id="menu-btn"><i data-lucide="menu"></i></button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white absolute top-full left-0 w-full shadow-xl p-6 flex flex-col gap-4">
-            <a href="#home" class="text-lg font-medium py-2 border-b border-gray-100">Início</a>
-            <a href="#about" class="text-lg font-medium py-2 border-b border-gray-100">Sobre</a>
-            <a href="#portfolio" class="text-lg font-medium py-2 border-b border-gray-100">Portfólio</a>
-            <a href="#services" class="text-lg font-medium py-2 border-b border-gray-100">Serviços</a>
-            <a href="#contact" class="text-lg font-medium py-2">Contato</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img id="foto-capa-principal" src="" alt="Capa" class="w-full h-full object-cover opacity-70">
-            <div class="absolute inset-0 hero-gradient"></div>
-        </div>
-        <div class="relative z-10 text-center px-6 max-w-4xl">
-            <h1 class="text-5xl md:text-7xl mb-6 text-white drop-shadow-lg">A eternidade em um <span class="italic">nascimento</span>.</h1>
-            <p class="text-xl md:text-2xl text-white/90 mb-8 font-light italic">Documentando o florescer da vida através de um olhar devocional e protetor.</p>
-            <a href="#portfolio" class="inline-block bg-gold-soft text-white px-8 py-4 rounded-full hover:bg-[#B38B6D] transition-all transform hover:scale-105 shadow-lg uppercase tracking-widest text-sm font-semibold">Ver Portfólio</a>
-        </div>
-    </section>
-
-    <!-- Sobre -->
-    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="relative">
-                <div class="aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl bg-[#E8D5C4]">
-                    <img id="foto-perfil-vrin" src="" alt="Vrin Resende" class="w-full h-full object-cover">
-                </div>
-                <div class="absolute -bottom-6 -right-6 bg-white p-8 rounded-lg shadow-xl hidden lg:block max-w-xs border border-[#E8D5C4]/30">
-                    <p class="italic text-earth leading-relaxed">"Fotografar um parto é realizar um serviço com amor, honrando a força e a autonomia de cada mulher."</p>
-                </div>
+            <div className="absolute -bottom-6 -right-6 bg-white p-8 rounded-lg shadow-xl hidden lg:block max-w-xs border border-[#E8D5C4]/30">
+              <p className="italic text-[#8B7E74] leading-relaxed">"Fotografar um parto é realizar um seva com amor, honrando a força e a autonomia de cada mulher."</p>
             </div>
-            <div>
-                <span class="text-gold-soft uppercase tracking-[0.3em] text-sm font-bold block mb-4">A Fotógrafa</span>
-                <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight">Olá, sou Vrin Resende</h2>
-                <div class="space-y-6 text-lg text-[#6B655F] leading-relaxed">
-                    <p class="font-medium italic text-earth">A minha jornada na fotografia de parto começou de um lugar de cura profunda.</p>
-                    <p>Após vivenciar um parto pessoal muito invasivo, senti o chamado de transformar essa dor em um serviço de proteção e acolhimento. Dediquei-me a estudar o universo do nascimento para garantir que nenhuma mulher precise passar pelo que eu passei.</p>
-                    <p>Baseada em Belo Horizonte, trago para cada nascimento um compromisso: registrar a beleza e a força desse momento, preservando a integridade e a narrativa única de cada família.</p>
-                </div>
-                <div class="mt-10 flex flex-wrap gap-6">
-                    <a href="https://instagram.com/vrndavanaresende" target="_blank" class="flex items-center gap-2 hover:text-gold-soft transition-colors">
-                        <i data-lucide="instagram" class="w-5 h-5"></i>
-                        <span class="text-sm font-semibold">@vrndavanaresende</span>
-                    </a>
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="map-pin" class="w-5 h-5"></i>
-                        <span class="text-sm font-semibold">Belo Horizonte, MG</span>
-                    </div>
-                </div>
+          </div>
+          
+          <div>
+            <span className="text-[#C4A484] uppercase tracking-[0.3em] text-sm font-bold block mb-4">A Fotógrafa</span>
+            <h2 className="text-4xl md:text-5xl font-serif mb-8 leading-tight">Olá, sou Vrin Resende</h2>
+            <div className="space-y-6 text-lg text-[#6B655F] leading-relaxed">
+              <p className="font-medium italic text-[#8B7E74]">
+                A minha jornada na fotografia de parto começou de um lugar de cura profunda.
+              </p>
+              <p>
+                Após vivenciar um parto pessoal muito invasivo, senti o chamado de transformar essa dor em um serviço de proteção e acolhimento. Dediquei-me a estudar o universo do nascimento para garantir que nenhuma mulher precise passar pelo que eu passei.
+              </p>
+              <p>
+                Hoje, o meu trabalho no projeto <strong>Florescer</strong> é oferecer um olhar sensível, devocional e, acima de tudo, respeitoso. Acredito que o parto é um portal sagrado que exige silêncio, presença e empatia.
+              </p>
+              <p>
+                Baseada em Belo Horizonte, trago para cada nascimento um compromisso: registrar a beleza e a força desse momento, preservando a integridade e a narrativa única de cada família.
+              </p>
             </div>
-        </div>
-    </section>
-
-    <!-- Portfólio -->
-    <section id="portfolio" class="py-24 bg-[#F7F2EE]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-serif mb-4 text-sage-dark">Histórias Contadas</h2>
-                <div class="w-20 h-1 bg-gold-soft mx-auto"></div>
+            <div className="mt-10 flex flex-wrap gap-6">
+              <a href="https://instagram.com/vrndavanaresende" target="_blank" className="flex items-center gap-2 hover:text-[#C4A484] transition-colors">
+                <Instagram size={20} />
+                <span className="text-sm font-semibold">@vrndavanaresende</span>
+              </a>
+              <div className="flex items-center gap-2">
+                <MapPin size={20} />
+                <span className="text-sm font-semibold">Belo Horizonte, MG</span>
+              </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="group relative overflow-hidden rounded-xl aspect-[3/4] cursor-pointer">
-                    <img id="portfolio-1" src="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
-                        <h3 class="text-white text-2xl font-serif italic">Espera</h3>
-                    </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio Grid */}
+      <section id="portfolio" className="py-24 bg-[#F7F2EE]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-serif mb-4 text-[#4A443F]">Histórias Contadas</h2>
+            <div className="w-20 h-1 bg-[#C4A484] mx-auto"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: "Espera", img: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2040&auto=format&fit=crop" },
+              { title: "Nascimento", img: "https://images.unsplash.com/photo-1554446422-d05db23719d2?q=80&w=2072&auto=format&fit=crop" },
+              { title: "Primeiro Olhar", img: "https://images.unsplash.com/photo-1525124113944-774415840618?q=80&w=2070&auto=format&fit=crop" },
+              { title: "Família", img: "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=2070&auto=format&fit=crop" },
+              { title: "Detalhes", img: "https://images.unsplash.com/photo-1544126592-807daf21565c?q=80&w=2070&auto=format&fit=crop" },
+              { title: "Amamentação", img: "https://images.unsplash.com/photo-1551803091-e20673f15770?q=80&w=1935&auto=format&fit=crop" }
+            ].map((item, index) => (
+              <div key={index} className="group relative overflow-hidden rounded-xl aspect-[3/4] cursor-pointer">
+                <img 
+                  src={item.img} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
+                  <h3 className="text-white text-2xl font-serif italic">{item.title}</h3>
+                  <div className="flex items-center text-white/80 mt-2 text-sm uppercase tracking-widest">
+                    Ver Galeria <ChevronRight size={16} />
+                  </div>
                 </div>
-                <div class="group relative overflow-hidden rounded-xl aspect-[3/4] cursor-pointer">
-                    <img id="portfolio-2" src="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
-                        <h3 class="text-white text-2xl font-serif italic">Nascimento</h3>
-                    </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-24 px-6 max-w-5xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-[#C4A484] uppercase tracking-[0.3em] text-sm font-bold block mb-4">Experiência</span>
+          <h2 className="text-4xl font-serif">Como trabalhamos juntos</h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12">
+          <div className="bg-white p-10 rounded-2xl shadow-sm border border-[#E8D5C4]/30 hover:shadow-md transition-shadow">
+            <Camera className="text-[#C4A484] mb-6" size={40} />
+            <h3 className="text-2xl font-serif mb-4">Fotografia de Parto</h3>
+            <p className="text-[#6B655F] mb-6 leading-relaxed">
+              Cobertura integral com foco na autonomia da mulher e no respeito ao ambiente de nascimento. Presença discreta e olhar atento aos vínculos.
+            </p>
+            <ul className="space-y-3 text-sm text-[#8B7E74]">
+              <li>• Disponibilidade 24/7 a partir das 37 semanas</li>
+              <li>• Edição curada e artística</li>
+              <li>• Entrega em galeria online segura</li>
+            </ul>
+          </div>
+
+          <div className="bg-white p-10 rounded-2xl shadow-sm border border-[#E8D5C4]/30 hover:shadow-md transition-shadow">
+            <Heart className="text-[#C4A484] mb-6" size={40} />
+            <h3 className="text-2xl font-serif mb-4">Filme de Nascimento</h3>
+            <p className="text-[#6B655F] mb-6 leading-relaxed">
+              Vídeo documental que capta a atmosfera, os sons e a emoção do primeiro encontro. Uma memória viva para gerações.
+            </p>
+            <ul className="space-y-3 text-sm text-[#8B7E74]">
+              <li>• Short Film emocionante (3-5 min)</li>
+              <li>• Teaser para partilha rápida</li>
+              <li>• Áudio ambiente preservado com delicadeza</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+          <div>
+            <h2 className="text-4xl font-serif mb-8">Vamos conversar?</h2>
+            <p className="text-lg text-[#6B655F] mb-12">
+              Se sente que o meu olhar ressoa com o que deseja para o seu parto, entre em contacto. Adoraria conhecer os seus planos.
+            </p>
+            
+            <div className="space-y-6">
+              <a href="https://wa.me/5531972679964" className="flex items-center gap-4 group">
+                <div className="w-12 h-12 bg-[#F7F2EE] rounded-full flex items-center justify-center group-hover:bg-[#C4A484] group-hover:text-white transition-all">
+                  <Phone size={20} />
                 </div>
-                <div class="group relative overflow-hidden rounded-xl aspect-[3/4] cursor-pointer">
-                    <img id="portfolio-3" src="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
-                        <h3 class="text-white text-2xl font-serif italic">Primeiro Olhar</h3>
-                    </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-[#8B7E74]">WhatsApp</p>
+                  <p className="font-semibold">+55 31 97267-9964</p>
                 </div>
+              </a>
+
+              <a href="mailto:vrnbarcellos@icloud.com" className="flex items-center gap-4 group">
+                <div className="w-12 h-12 bg-[#F7F2EE] rounded-full flex items-center justify-center group-hover:bg-[#C4A484] group-hover:text-white transition-all">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-[#8B7E74]">E-mail</p>
+                  <p className="font-semibold">vrnbarcellos@icloud.com</p>
+                </div>
+              </a>
             </div>
-        </div>
-    </section>
+          </div>
 
-    <!-- Serviços -->
-    <section id="services" class="py-24 px-6 max-w-5xl mx-auto">
-        <div class="text-center mb-16">
-            <span class="text-gold-soft uppercase tracking-[0.3em] text-sm font-bold block mb-4">Experiência</span>
-            <h2 class="text-4xl font-serif">Como trabalhamos juntos</h2>
-        </div>
-        <div class="grid md:grid-cols-2 gap-12">
-            <div class="bg-white p-10 rounded-2xl shadow-sm border border-[#E8D5C4]/30">
-                <i data-lucide="camera" class="text-gold-soft mb-6 w-10 h-10"></i>
-                <h3 class="text-2xl font-serif mb-4">Fotografia de Parto</h3>
-                <p class="text-[#6B655F] mb-6 leading-relaxed">Cobertura integral com foco na autonomia da mulher e no respeito ao ambiente de nascimento.</p>
+          <form className="bg-[#FDFBF9] p-10 rounded-2xl border border-[#E8D5C4]/30" onSubmit={(e) => e.preventDefault()}>
+            <div className="grid grid-cols-1 gap-6">
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-[#8B7E74] mb-2 font-bold">Nome Completo</label>
+                <input type="text" className="w-full bg-white border border-[#E8D5C4] p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4A484]/20 transition-all" placeholder="Seu nome" />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-[#8B7E74] mb-2 font-bold">DPP (Data do Parto)</label>
+                <input type="date" className="w-full bg-white border border-[#E8D5C4] p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4A484]/20 transition-all" />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-[#8B7E74] mb-2 font-bold">Mensagem</label>
+                <textarea rows="4" className="w-full bg-white border border-[#E8D5C4] p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4A484]/20 transition-all" placeholder="Conte-me os seus desejos para este dia..."></textarea>
+              </div>
+              <button className="w-full bg-[#4A443F] text-white p-5 rounded-lg uppercase tracking-widest text-sm font-bold hover:bg-[#33302D] transition-colors shadow-lg">
+                Enviar Mensagem
+              </button>
             </div>
-            <div class="bg-white p-10 rounded-2xl shadow-sm border border-[#E8D5C4]/30">
-                <i data-lucide="heart" class="text-gold-soft mb-6 w-10 h-10"></i>
-                <h3 class="text-2xl font-serif mb-4">Filme de Nascimento</h3>
-                <p class="text-[#6B655F] mb-6 leading-relaxed">Vídeo documental que capta a atmosfera, os sons e a emoção do primeiro encontro.</p>
-            </div>
+          </form>
         </div>
-    </section>
+      </section>
 
-    <!-- Contact -->
-    <section id="contact" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
-            <div>
-                <h2 class="text-4xl font-serif mb-8">Vamos conversar?</h2>
-                <p class="text-lg text-[#6B655F] mb-12">Adoraria ouvir a sua história e os seus planos para este dia tão especial.</p>
-                <div class="space-y-6">
-                    <a href="https://wa.me/5531972679964" target="_blank" class="flex items-center gap-4 group">
-                        <div class="w-12 h-12 bg-beige-light rounded-full flex items-center justify-center group-hover:bg-gold-soft group-hover:text-white transition-all">
-                            <i data-lucide="phone" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs uppercase tracking-widest text-earth">WhatsApp</p>
-                            <p class="font-semibold">+55 31 97267-9964</p>
-                        </div>
-                    </a>
-                    <a href="mailto:vrnbarcellos@gmail.com" class="flex items-center gap-4 group">
-                        <div class="w-12 h-12 bg-beige-light rounded-full flex items-center justify-center group-hover:bg-gold-soft group-hover:text-white transition-all">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs uppercase tracking-widest text-earth">E-mail</p>
-                            <p class="font-semibold">vrnbarcellos@gmail.com.com</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <form class="bg-beige-light p-10 rounded-2xl border border-[#E8D5C4]/30">
-                <div class="grid grid-cols-1 gap-6">
-                    <input type="text" placeholder="Nome Completo" class="w-full p-4 border border-[#E8D5C4] rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-soft/20">
-                    <input type="text" placeholder="Data Prevista (DPP)" class="w-full p-4 border border-[#E8D5C4] rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-soft/20">
-                    <textarea rows="4" placeholder="Sua mensagem..." class="w-full p-4 border border-[#E8D5C4] rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-soft/20"></textarea>
-                    <button type="submit" class="w-full bg-sage-dark text-white p-5 rounded-lg uppercase tracking-widest text-sm font-bold hover:bg-black transition-colors">Enviar Mensagem</button>
-                </div>
-            </form>
+      {/* Footer */}
+      <footer className="bg-[#4A443F] text-white py-16 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-serif italic mb-2">Florescer</h2>
+            <p className="text-white/60 text-sm">© 2026 Vrin Resende. Todos os direitos reservados.</p>
+          </div>
+          
+          <div className="flex gap-8 text-sm uppercase tracking-widest font-light text-white/70">
+            <a href="#home" className="hover:text-white transition-colors">Início</a>
+            <a href="#about" className="hover:text-white transition-colors">Sobre</a>
+            <a href="#portfolio" className="hover:text-white transition-colors">Portfólio</a>
+          </div>
         </div>
-    </section>
+      </footer>
 
-    <!-- Footer -->
-    <footer class="bg-sage-dark text-white py-16 px-6">
-        <div class="max-w-7xl mx-auto text-center md:text-left">
-            <h2 class="text-2xl font-serif italic mb-2">Florescer</h2>
-            <p class="text-white/60 text-sm">© 2026 Vrin Resende. Belo Horizonte, MG.</p>
-        </div>
-    </footer>
-
-    <!-- Botão Flutuante do WhatsApp -->
-    <a href="https://wa.me/5531972679964" target="_blank" class="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50">
-        <i data-lucide="message-circle" class="w-8 h-8"></i>
-    </a>
-
-    <script>
-        // ==========================================
-        // PAINEL DE CONTROLE DE IMAGENS
-        // Altere os nomes dos ficheiros abaixo para atualizar as fotos
-        // ==========================================
-        const MINHAS_FOTOS = {
-            capaPrincipal: src= "https://we.tl/t-k7ScPDadIt, 
-            perfilVrin: "photo_2025-10-02_18-33-17.jpg",
-            portfolio1: "https://we.tl/t-k7ScPDadIt",
-            portfolio2: "https://we.tl/t-k7ScPDadIt",
-            portfolio3: "https://images.unsplash.com/photo-1525124113944-774415840618?q=80"
-        };
-
-        function atualizarFotos() {
-            document.getElementById('foto-capa-principal').src = mminha-foto-capa.png;
-            document.getElementById('foto-perfil-vrin').src = MINHAS_FOTOS.perfilVrin;
-            document.getElementById('portfolio-1').src = MINHAS_FOTOS.portfolio1;
-            document.getElementById('portfolio-2').src = MINHAS_FOTOS.portfolio2;
-            document.getElementById('portfolio-3').src = MINHAS_FOTOS.portfolio3;
-        }
-
-        window.onload = () => {
-            lucide.createIcons();
-            atualizarFotos();
-        };
-
-        // Lógica de Navbar e Menu
-        const navbar = document.getElementById('navbar');
-        window.onscroll = () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
-                navbar.classList.remove('py-5');
-            } else {
-                navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
-                navbar.classList.add('py-5');
-            }
-        };
-
-        const btn = document.getElementById('menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        btn.onclick = () => menu.classList.toggle('hidden');
-    </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
+      {/* Floating WhatsApp Button */}
+      <a 
+        href="https://wa.me/5531972679964" 
+        target="_blank" 
+        className="fixed bottom-8 right-8 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center"
+      >
+        <MessageCircle size={32} fill="white" />
+      </a>
+    </div>
+  );
+}
