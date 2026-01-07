@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florescer | Vrin Resende - Fotografia de Parto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .bg-beige-light { background-color: #FDFBF9; }
+        .text-sage-dark { color: #4A443F; }
+        .text-earth { color: #8B7E74; }
+        .bg-gold-soft { background-color: #C4A484; }
+        .hero-gradient { background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%, #FDFBF9 100%); }
+    </style>
+</head>
+<body class="bg-beige-light text-sage-dark antialiased">
+
+    <!-- Navegação -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="text-2xl font-serif italic tracking-tighter text-earth">Florescer</div>
+            </div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Início</a>
+                <a href="#about" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Sobre</a>
+                <a href="#portfolio" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Portfólio</a>
+                <a href="#services" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Serviços</a>
+                <a href="#contact" class="text-xs uppercase tracking-widest hover:text-[#C4A484] transition-colors">Contato</a>
+            </div>
+            <button class="md:hidden" id="menu-btn"><i data-lucide="menu"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white absolute top-full left-0 w-full shadow-xl p-6 flex flex-col gap-4">
+            <a href="#home" class="text-lg font-medium py-2 border-b border-gray-100">Início</a>
+            <a href="#about" class="text-lg font-medium py-2 border-b border-gray-100">Sobre</a>
+            <a href="#portfolio" class="text-lg font-medium py-2 border-b border-gray-100">Portfólio</a>
+            <a href="#services" class="text-lg font-medium py-2 border-b border-gray-100">Serviços</a>
+            <a href="#contact" class="text-lg font-medium py-2">Contato</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img id="foto-capa-principal" src="" alt="Capa" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        <div class="relative z-10 text-center px-6 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl mb-6 text-white drop-shadow-lg">A eternidade em um <span class="italic">nascimento</span>.</h1>
+            <p class="text-xl md:text-2xl text-white/90 mb-8 font-light italic">Documentando o florescer da vida através de um olhar devocional e protetor.</p>
+            <a href="#portfolio" class="inline-block bg-gold-soft text-white px-8 py-4 rounded-full hover:bg-[#B38B6D] transition-all transform hover:scale-105 shadow-lg uppercase tracking-widest text-sm font-semibold">Ver Portfólio</a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+                <div class="aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl bg-[#E8D5C4]">
+                    <img id="foto-perfil-vrin" src="" alt="Vrin Resende" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-6 -right-6 bg-white p-8 rounded-lg shadow-xl hidden lg:block max-w-xs border border-[#E8D5C4]/30">
+                    <p class="italic text-earth leading-relaxed">"Fotografar um parto é realizar um seva com amor, honrando a força e a autonomia de cada mulher."</p>
+                </div>
+            </div>
+            <div>
+                <span class="text-gold-soft uppercase tracking-[0.3em] text-sm font-bold block mb-4">A Fotógrafa</span>
+                <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight">Olá, sou Vrin Resende</h2>
+                <div class="space-y-6 text-lg text-[#6B655F] leading-relaxed">
+                    <p class="font-medium italic text-earth">A minha jornada na fotografia de parto começou de um lugar de cura profunda.</p>
+                    <p>Após vivenciar um parto pessoal muito invasivo, senti o chamado de transformar essa dor em um serviço de proteção e acolhimento.</p>
+                    <p>Baseada em Belo Horizonte, trago para cada nascimento um compromisso: registrar a beleza e a força desse momento.</p>
+                </div>
+                <div class="mt-10 flex flex-wrap gap-6">
+                    <a href="https://instagram.com/vrndavanaresende" target="_blank" class="flex items-center gap-2 hover:text-gold-soft transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                        <span class="text-sm font-semibold">@vrndavanaresende</span>
+                    </a>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        <span class="text-sm font-semibold">Belo Horizonte, MG</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfólio -->
+    <section id="portfolio" class="py-24 bg-[#F7F2EE]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-serif mb-4 text-sage-dark">Histórias Contadas</h2>
+                <div class="w-20 h-1 bg-gold-soft mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="group relative overflow-hidden rounded-xl aspect-[3/4] cursor-pointer">
+                    <img id="portfolio-1" src="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
+                        <h3 class="text-white text-2xl font-serif italic">Espera</h3>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-xl aspect-[3/4] cursor-pointer">
+                    <img id="portfolio-2" src="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
+                        <h3 class="text-white text-2xl font-serif italic">Nascimento</h3>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-xl aspect-[3/4] cursor-pointer">
+                    <img id="portfolio-3" src="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8">
+                        <h3 class="text-white text-2xl font-serif italic">Primeiro Olhar</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato e Footer omitidos para brevidade, mas mantidos na lógica de script -->
+    <footer class="bg-sage-dark text-white py-16 px-6 text-center">
+        <h2 class="text-2xl font-serif italic mb-2">Florescer</h2>
+        <p class="text-white/60 text-sm">© 2026 Vrin Resende. Belo Horizonte, MG.</p>
+    </footer>
+
+    <script>
+        // ==========================================
+        // PAINEL DE CONTROLE DE IMAGENS (Aba Organizada)
+        // Substitua os textos entre aspas pelos nomes das suas fotos
+        // ==========================================
+        const MINHAS_FOTOS = {
+            capaPrincipal: "src=minha_foto_capa.jpg", 
+            perfilVrin: "photo_2025-10-02_18-33-17.jpg",
+            portfolio1: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80",
+            portfolio2: "https://images.unsplash.com/photo-1554446422-d05db23719d2?q=80",
+            portfolio3: "https://images.unsplash.com/photo-1525124113944-774415840618?q=80"
+        };
+
+        // Função que aplica as fotos no site automaticamente
+        function atualizarFotos() {
+            document.getElementById('foto-capa-principal').src = MINHAS_FOTOS.capaPrincipal;
+            document.getElementById('foto-perfil-vrin').src = MINHAS_FOTOS.perfilVrin;
+            document.getElementById('portfolio-1').src = MINHAS_FOTOS.portfolio1;
+            document.getElementById('portfolio-2').src = MINHAS_FOTOS.portfolio2;
+            document.getElementById('portfolio-3').src = MINHAS_FOTOS.portfolio3;
+        }
+
+        // Inicialização do site
+        window.onload = () => {
+            lucide.createIcons();
+            atualizarFotos();
+        };
+
+        // Lógica de Menu e Scroll
+        const navbar = document.getElementById('navbar');
+        window.onscroll = () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                navbar.classList.remove('py-5');
+            } else {
+                navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-3');
+                navbar.classList.add('py-5');
+            }
+        };
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.onclick = () => menu.classList.toggle('hidden');
+    </script>
+</body>
+</html>
